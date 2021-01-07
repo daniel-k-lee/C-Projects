@@ -1,0 +1,138 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+int displayMenu();
+void inputName(char *name);
+void changeToUpper(char *name);
+void changeToLower(char *name);
+void count(char *name);
+void reverse(char *name);
+void mostLetters(char *name);
+
+int main()
+{
+    int menuChoice;
+    char name[100];
+    cout<<"-----------------------\n";
+    cout<<"| City and Team Names |\n";
+    cout<<"-----------------------\n\n";
+    do {
+        menuChoice = displayMenu();
+        switch (menuChoice) {
+            case 1:
+                inputName(name);
+                break;
+            case 2:
+                changeToUpper(name);
+                break;
+            case 3:
+                changeToLower(name);
+                break;
+            case 4:
+                count(name);
+                break;
+            case 5:
+                reverse(name);
+                break;
+            case 6:
+                mostLetters(name);
+                break;
+            case 7:
+                cout<<"Now Exiting... Goodbye!\n";
+                break;
+            default:
+                break;
+        }
+        cout<<"\n";
+    } while (menuChoice != 7);
+    
+    return 0;
+}
+
+int displayMenu() {
+    int menuChoice;
+    while (true)
+    {
+        cout<<"1. Input City and Team Name\n";
+        cout<<"2. Change to Upper\n";
+        cout<<"3. Change to Lower\n";
+        cout<<"4. Word Count\n";
+        cout<<"5. Reverse Name\n";
+        cout<<"6. Most Common Character\n";
+        cout<<"7. Exit\n";
+        cout<<"Select a menu option: ";
+        //cin.ignore();
+        cin>>menuChoice;
+        if (menuChoice < 1 || menuChoice > 7) {
+            cout<<"\n"<<menuChoice<<" is an invalid choice. Please reenter a valid option ...\n\n";
+            continue;
+        }
+        break;
+    }
+    return menuChoice;
+}
+
+void inputName(char *name) {
+    string temp;
+    cout<<"\tEnter your team city and name: ";
+    cin.ignore();
+    getline(cin, temp);
+    cout<<"\tDisplay name: "<<temp<<"\n";
+    strcpy(name, temp.c_str());
+}
+void changeToUpper(char *name) {
+    cout<<"\tChange to Upper:\t";
+    for (int i = 0; i < strlen(name); i++) {
+        cout<<(char)toupper(name[i]);
+    }
+    cout<<endl;
+}
+void changeToLower(char *name) {
+    cout<<"\tChange to Lower:\t";
+    for (int i = 0; i < strlen(name); i++) {
+        cout<<(char)tolower(name[i]);
+    }
+    cout<<endl;
+}
+void count(char *name) {
+    int count = 1;
+    for (int i = 0; i < strlen(name); i++) {
+        if (name[i] == ' ')
+            count++;
+    }
+    cout<<"\tCount:\tThere are "<<count<<" words in your name.\n";
+}
+void reverse(char *name) {
+    cout<<"\tReverse Name:\t";
+    for (int i = strlen(name)-1; i >= 0; i--) {
+        cout<<name[i];
+    }
+    cout<<endl;
+}
+void mostLetters(char *name) {
+    char maxLetter;
+    int maxCount = 0;
+    int count = 0;
+    for (int i = 0; i < strlen(name); i++) {
+        count = 0;
+        for (int j = 0; j < strlen(name); j++) {
+            if (toupper(name[i]) == toupper(name[j]))
+                count++;
+        }
+        if (maxCount < count) {
+            maxCount = count;
+            maxLetter = toupper(name[i]);
+        }
+    }
+    cout<<"\tMost Letters:\tThe most used letter in your name is '"<<maxLetter<<"' with a count of "<<maxCount<<endl;
+}

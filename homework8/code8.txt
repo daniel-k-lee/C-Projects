@@ -1,0 +1,104 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+
+using namespace std;
+
+void generateRainfalls(int rainfalls[], int size);
+int calculateTotal(int rainfalls[], int size);
+int calculateAverage(int totalRainfall, int months);
+int getMin(int rainfalls[], int size);
+int getMax(int rainfalls[], int size);
+void displayResult(int rainfalls[], string months[], int numOfMonths, int totalRainfall, int averageRainfall, int min, int max);
+void sort(int rainfalls[], string months[], int numOfMonths);
+
+int main()
+{
+    const int NUM_OF_MONTH = 12;
+    string MONTHS[] = {"January","Feburary","March","April","May","June","July","August","September","October","November","December"};
+    int rainfalls[NUM_OF_MONTH];
+    int totalRainfall;
+    int averageRainfall;
+    int min;
+    int max;
+    generateRainfalls(rainfalls, NUM_OF_MONTH);
+    totalRainfall = calculateTotal(rainfalls, NUM_OF_MONTH);
+    averageRainfall = calculateAverage(totalRainfall, NUM_OF_MONTH);
+    min = getMin(rainfalls, NUM_OF_MONTH);
+    max = getMax(rainfalls, NUM_OF_MONTH);
+    displayResult(rainfalls, MONTHS, NUM_OF_MONTH, totalRainfall, averageRainfall, min, max);
+    sort(rainfalls, MONTHS, NUM_OF_MONTH);
+    displayResult(rainfalls, MONTHS, NUM_OF_MONTH, totalRainfall, averageRainfall, min, max);
+    return 0;
+}
+
+void generateRainfalls(int rainfalls[], int size) {
+    srand(time(0));
+    for (int i = 0; i < size; i++) {
+        rainfalls[i] = rand()%6;
+    }
+}
+
+int calculateTotal(int rainfalls[], int size) {
+  int i, sum = 0;       
+   for (i = 0; i < size; ++i) {
+      sum += rainfalls[i];
+   }
+   return sum;
+}
+
+int calculateAverage(int totalRainfall, int months) {
+    return (totalRainfall/months);
+}
+
+int getMin(int rainfalls[], int size) {
+      int i, min = 0;       
+   for (i = 0; i < size; ++i) {
+       if (rainfalls[i] < min)
+        min = rainfalls[i];
+   }
+   cout<<"\n";
+   return min;
+}
+
+int getMax(int rainfalls[], int size) {
+      int i, max = 0;       
+   for (i = 0; i < size; ++i) {
+       if (rainfalls[i] > max)
+        max = rainfalls[i];
+   }
+   cout<<"\n";
+   return max;
+}
+
+void displayResult(int rainfalls[], string months[], int numOfMonths, int totalRainfall, int averageRainfall, int min, int max) {
+    for (int i = 0; i < numOfMonths; i++) {
+        cout<<months[i]<<": "<<rainfalls[i]<<"\n";
+    }
+    cout<<"Total rainfall of the year\t"<<totalRainfall<<"\n";
+    cout<<"Average rainfall of a month\t"<<averageRainfall<<"\n";
+    cout<<"Minimum rainfall of a month\t"<<min<<"\n";
+    cout<<"Maximum rainfull of a month\t"<<max<<"\n";
+}
+
+void sort(int rainfalls[], string months[], int numOfMonths) {
+    for (int i = 1; i < numOfMonths; i++) {
+        for (int j = i-1; j>=0; j--) {
+            if (rainfalls[j+1] < rainfalls[j]) {
+        int tempInt = rainfalls[j];
+        string tempStr = months[j];
+        rainfalls[j] = rainfalls[j+1];
+        months[j] = months[j+1];
+        rainfalls[j+1] = tempInt;
+        months[j+1] = tempStr;                
+            }
+        }
+
+    }
+}

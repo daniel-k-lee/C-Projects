@@ -1,0 +1,95 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    const string SIZES = "S, M, L, XL";
+    int event;
+    string eventName;
+    double eventCosts[4] = {250.0, 200.0, 300.0, 275.0};
+    string eventStartDates[4] = {"10/13/19", "12/05/19", "12/29/19", "11/30/19"};
+    int eventIndex;
+    string lastName;
+    int age;
+    int tShirtCnt;
+    double tShirtPrice = 15.0;
+    string tShirtSize;
+    double total;
+    
+    //input the data, the costs and income
+    cout.setf(ios::fixed);
+    cout.setf(ios::showpoint);
+    cout.precision(2);
+    cout << "Wellcome to the Triathlon Reservation System:\n\n";
+    cout << "1. La Jolla Juniors\n";
+    cout << "2. San Francisco Bay\n";
+    cout << "3. Seattle Freeze Off\n";
+    cout << "4. Vancouver Snow Bunnies\n";
+    cout << "5. Exit Reservation Menu\n\n";
+    cout << "Enter the number of the event where you wish to make a reservation: ";
+    cin >> event;
+    switch (event) {
+        case 1:
+        eventName = "La Jolla Juniors";
+        eventIndex = 0;
+        break;
+        case 2:
+        eventName = "San Francisco Bay";
+        eventIndex = 1;
+        break;
+        case 3:
+        eventName = "Seattle Freeze Off";
+        eventIndex = 2;
+        break;
+        case 4:
+        eventName = "Vancouver Snow Bunnies";
+        eventIndex = 3;
+        break;
+        default:
+        return 0;
+    }
+    cout << "\n\nTriathlon:\t\t" << eventName;
+    cout << "\nStarting Date:\t\t"<<eventStartDates[eventIndex];
+    cout << "\nCost per athlete:\t$"<<eventCosts[eventIndex];
+    cout << "\nCost per T-shirt:\t$" << tShirtPrice;
+    cout<<"\nSizes:\t\t\t" << SIZES <<"\n\n";
+    cout << "Enter your Last Name: ";
+    cin >> lastName;
+    cout << "Enter your age: ";
+    cin >>age;
+    if (age < 0) {
+        cout<<"That is not valid age - please reenter your age: ";
+        cin >>age;
+    }
+    cout << "Enter number of t-shirts you require: ";
+    cin >> tShirtCnt;
+    if (tShirtCnt < 0) {
+        cout<<"That is not a valid number of t-shirt - please reenter the value: ";
+        cin>>tShirtCnt;
+    }
+    cout<<"Please enter the size you wish (" << SIZES << "): ";
+    cin >> tShirtSize;
+    if (tShirtSize != "S" && tShirtSize != "M" && tShirtSize != "L" && tShirtSize != "XL") {
+        cout << "Sorry that is not a size we carry. Please reenter the size (" << SIZES <<"): ";
+        cin>>tShirtSize;
+    }
+    total = eventCosts[eventIndex] + tShirtPrice * tShirtCnt;
+    cout <<"\n\n*******************************************\n\n";
+    cout << eventName <<" Triathlon\n";
+    cout << "Althlete:\t\t"<<lastName<<"\n";
+    cout << "T-shirts:\t\t" <<tShirtCnt<<"\n";
+    cout << "Size:\t\t\t"<<tShirtSize<<"\n";
+    cout <<"Total:\t\t\t$"<<total<<"\n\n";
+    cout<<"Thank you for your reservation! See you soon.";
+    
+    return 0;
+}

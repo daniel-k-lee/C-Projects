@@ -1,0 +1,130 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+
+using namespace std;
+
+int displayMenu() {
+    int menuChoice;
+    while (true)
+    {
+        cout<<"Wellcome to the Series Game\n";
+        cout<<"1. Display Letter Backwards\n";
+        cout<<"2. Color Game\n";
+        cout<<"3. Special Character Game\n";
+        cout<<"4. Exit\n\n";
+        cout<<"Please enter your choice of game to play: ";
+        cin>>menuChoice;
+        if (menuChoice < 1 || menuChoice > 4) {
+            cout<<"\n"<<menuChoice<<" is an invalid choice. Please reenter a valid number ...\n\n";
+            continue;
+        }
+        break;
+    }
+    return menuChoice;
+}
+
+void displayBackwards() {
+    char lastLetter;
+    while (true) {
+        cout<<"Please enter an upper-case alphabetic character between M and R: ";
+        cin>>lastLetter;
+        if (lastLetter<'M' || lastLetter >'R') {
+            cout<<"\n"<<lastLetter<<" is not a valid character...\n\n";
+            continue;
+        }
+        for (char i = lastLetter; i >= 'A'; i--) {
+            cout<<i<<" ";
+        }
+        break;
+    }
+}
+void colors() {
+    string color1;
+    string color2;
+    string secondaryColor;
+    while (true) {
+        cout<<"Please enter two primary colors (red, blue, or yellow)\n";
+        cout<<"Color one: ";
+        cin>>color1;
+        if (color1.compare("red")!=0 && color1.compare("blue")!=0 && color1.compare("yellow")!=0) {
+            cout<<color1<<" is not a valid color\n";
+            continue;
+        }
+        cout<<"Color two: ";
+        cin>>color2;
+        if (color2.compare("red")!=0 && color2.compare("blue")!=0 && color2.compare("yellow")!=0) {
+            cout<<color2<<" is not a valid color\n";
+            continue;
+        }
+        if ((color1.compare("red")==0 && color2.compare("blue")==0) || (color2.compare("red")==0 && color1.compare("blue")==0))
+            secondaryColor = "purple";
+        else if ((color1.compare("yellow")==0 && color2.compare("blue")==0) || (color2.compare("yellow")==0 && color1.compare("blue")==0) )
+            secondaryColor = "green";
+        else if ((color1.compare("red")==0 && color2.compare("yellow")==0) || (color2.compare("red")==0 && color1.compare("yellow")==0))
+            secondaryColor = "orange";
+        else {
+            cout<<color1<<" and "<<color2<<" are invalid two primary colors...\n";
+            continue;
+        }
+        cout<<color1<<"**"<<secondaryColor<<"**"<<color2;
+        break;
+    }
+}
+void specialChar() {
+    int times;
+    char specialChar;
+    while (true) {
+        cout<<"Please enter a positive integer: ";
+        cin>>times;
+        if (times<1) {
+            cout<<times<<" is not a valid number...\n";
+            continue;
+        }
+        cout<<"Please enter a special character from this list: left curly bracket, ampersand, percent, pound, asterisk: ";
+        cin>>specialChar;
+        if (specialChar != '{' && specialChar!='&' && specialChar!='%' && specialChar!=156 && specialChar!='*') {
+            cout<<specialChar<<" is not a valid special character...\n";
+            continue;
+        }
+        for (int i = 0; i < times; i++)
+            cout<<specialChar;
+        cout<<"\n";
+        break;
+    }
+}
+int main()
+{
+    int menuChoice;
+    int startNumber;
+    
+    do {
+        menuChoice = displayMenu();
+        switch (menuChoice) {
+            case 1:
+                displayBackwards();
+                break;
+            case 2:
+                colors();
+                break;
+            case 3:
+                specialChar();
+                break;
+            case 4:
+                cout<<"Good bye!\n";
+                break;
+            default:
+                break;
+        }
+        cout<<"\n\n";
+    } while (menuChoice != 4);
+    
+    return 0;
+}
+

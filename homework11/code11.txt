@@ -1,0 +1,99 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+struct Rain {
+   string month;
+   int rainfall;
+};
+
+void initMonths(vector<Rain> &rains, vector<string> &months);
+void generateRainfalls(vector<Rain> &rains, int maxRain);
+string getMinMonths(vector<Rain> rains);
+string getMaxMonths(vector<Rain> rains);
+void displayResult(vector<Rain> rains, string minMonths, string maxMonths);
+void sort(vector<Rain> &rains);
+bool compareTwoMonths(Rain a, Rain b);
+
+
+int main()
+{
+    const int NUM_OF_MONTH = 12;
+    const int MAX_RAIN = 4;
+    vector <string> months {"January","Feburary","March","April","May","June","July","August","September","October","November","December"};
+    vector <Rain> rains(NUM_OF_MONTH);
+    string minMonths;
+    string maxMonths;
+    initMonths(rains, months);
+    generateRainfalls(rains, MAX_RAIN);
+    sort(rains);
+    minMonths = getMinMonths(rains);
+    maxMonths = getMaxMonths(rains);
+    displayResult(rains, minMonths, maxMonths);
+    return 0;
+}
+
+void initMonths(vector<Rain> &rains, vector<string> &months) {
+    for (int i = 0; i < rains.size(); i++) {
+        rains[i].month = months[i];
+    }
+}
+
+void generateRainfalls(vector<Rain> &rains, int maxRain) {
+    srand(time(0));
+    for (int i = 0; i < rains.size(); i++) {
+        rains[i].rainfall = rand()%(maxRain+1);
+    }
+}
+
+string getMinMonths(vector<Rain> rains) {
+    string minMonths = rains[0].month;
+    int min = rains[0].rainfall;       
+    for (int i = 1; i < rains.size(); ++i) {
+       if (rains[i].rainfall == min) {
+            minMonths += ", ";
+            minMonths += rains[i].month;
+       }
+   }
+   return minMonths;
+}
+
+string getMaxMonths(vector<Rain> rains) {
+    string maxMonths;
+      int max = rains[rains.size()-1].rainfall;       
+   for (int i = 0; i < rains.size(); i++) {
+        if (rains[i].rainfall == max) {
+        if (!maxMonths.empty())
+            maxMonths += ", ";
+        maxMonths += rains[i].month;
+       }
+   }
+
+   return maxMonths;
+}
+
+void displayResult(vector<Rain> rains, string minMonths, string maxMonths) {
+    for (int i = 0; i < rains.size(); i++) {
+        cout<<"  "<<rains[i].rainfall<<" inches in "<<rains[i].month<<"\n";
+    }
+    cout<<"\nMinimum rain in "<<minMonths<<"\n";
+    cout<<"Maximum rain in "<<maxMonths<<"\n";
+}
+
+void sort(vector<Rain> &rains) {
+    sort(rains.begin(), rains.end(), compareTwoMonths);
+}
+
+bool compareTwoMonths(Rain a, Rain b) {
+    return b.rainfall > a.rainfall;
+}

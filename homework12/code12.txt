@@ -1,0 +1,88 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+struct Rain {
+   string month;
+   int rainfall;
+};
+
+void initMonths(vector<Rain> &rains, vector<string> &months);
+void generateRainfalls(vector<Rain> &rains, int maxRain);
+void writeToFile(vector<Rain> rains, string file);
+int generateRandomMonth();
+void addNewRecord(vector<Rain> rains, fstream &out, string &existingMonths);
+bool isDupMonth(string month, string existingMonths);
+int generateRandomMonth();
+
+int main()
+{
+    const int NUM_OF_MONTH = 12;
+    const int MAX_RAIN = 4;
+    const string FILE_NAME = "scramble.txt";
+    vector <string> months {"January","Feburary","March","April","May","June","July","August","September","October","November","December"};
+    vector <Rain> rains(NUM_OF_MONTH);
+    initMonths(rains, months);
+    generateRainfalls(rains, MAX_RAIN);
+    writeToFile(rains, FILE_NAME);
+    return 0;
+}
+
+void initMonths(vector<Rain> &rains, vector<string> &months) {
+    for (int i = 0; i < rains.size(); i++) {
+        rains[i].month = months[i];
+    }
+}
+
+void generateRainfalls(vector<Rain> &rains, int maxRain) {
+    srand(time(0));
+    for (int i = 0; i < rains.size(); i++) {
+        rains[i].rainfall = rand()%(maxRain+1);
+    }
+}
+
+
+
+void writeToFile(vector<Rain> rains, string filename) {
+    string existingMonths;
+    fstream dataFile;
+    dataFile.open(filename, ios::out);
+    for (int i = 0; i < rains.size(); i++) {
+        addNewRecord(rains, dataFile, existingMonths);
+    }
+    dataFile.close();
+}
+
+void addNewRecord(vector<Rain> rains, fstream &out, string &existingMonths) {
+    int newMonth = generateRandomMonth();
+    while (isDupMonth(rains[newMonth].month, existingMonths)) {
+        newMonth = generateRandomMonth();
+    }
+    out<<rains[newMonth].month<<" had "<<rains[newMonth].rainfall<<" inches"<<"\n";
+    existingMonths += rains[newMonth].month;
+}
+
+bool isDupMonth(string month, string existingMonths) {
+    std::size_t pos = existingMonths.find(month);
+    if (pos == std::string::npos)
+        return false;
+    else
+        return true;
+}
+
+int generateRandomMonth() {
+    return rand()%(12);
+}
+

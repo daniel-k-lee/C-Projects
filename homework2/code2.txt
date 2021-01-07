@@ -1,0 +1,70 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+
+using namespace std;
+
+int
+main ()
+{
+  //declare variables
+  const int BOAT_LENGTH = 40;
+  const int FRIENDS_CNT = 3;
+  float sailboat;
+  float salesTax;
+  float registration;
+  float insurance;
+  float haulAndPaintBottom;
+  float newHeadSail;
+  float lifeRaft;
+  float foodProvisioning;
+  float diesel;
+  float medicalKit;
+  float initialCostOfSailBoat;
+  float preparationCost;
+  float totalCost;
+
+  //assign values and compute
+  sailboat = 20000.0;
+  salesTax = sailboat * 0.0775;
+  registration = 45.55;
+  insurance = sailboat * 0.01 + 566.88;
+  haulAndPaintBottom = BOAT_LENGTH * 45;
+  newHeadSail = 2300.0;
+  lifeRaft = 3800.0;
+  foodProvisioning = FRIENDS_CNT * 1250;
+  diesel = 760.0;
+  medicalKit = 666.80;
+
+  //compute initialCostOfSailBoat, preparationCost, totalCost
+  initialCostOfSailBoat = sailboat + salesTax + registration + insurance;
+  preparationCost =
+    haulAndPaintBottom + newHeadSail + lifeRaft + foodProvisioning + diesel +
+    medicalKit;
+  totalCost = initialCostOfSailBoat + preparationCost;
+
+  //display everything
+  cout<<"INITIAL BOAT COSTS \n\n";
+  cout << "Sail Boat \t\t" << sailboat << endl;
+  cout << "Sales Tax \t\t" << salesTax << endl;
+  cout << "Registration \t\t" << registration << endl;
+  cout << "Insurance \t\t" << insurance << endl<<endl<<endl;
+  cout<<"PREPARATION COSTS \n\n";
+  cout << "Haul and Paint Bottom\t" << haulAndPaintBottom << endl;
+  cout << "New Head Sail \t\t" << newHeadSail << endl;
+  cout << "Life Raft \t\t" << lifeRaft << endl;
+  cout << "Food Provisioning\t" << foodProvisioning << endl;
+  cout << "Diesel\t\t\t" << diesel << endl;
+  cout << "Medical Kit \t\t" << medicalKit << endl<<endl;
+  cout << "Total Initial Cost\t" << initialCostOfSailBoat << endl;
+  cout << "Total Prep Cost\t\t" << preparationCost << endl;
+  cout << "Totals\t\t\t" << totalCost << endl;
+
+  return 0;
+}

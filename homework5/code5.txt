@@ -1,0 +1,73 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int menuChoice;
+    int startNumber;
+    
+    do {
+        cout<<"Wellcome to the Series Game\n";
+        cout<<"1. Count Backwards\n";
+        cout<<"2. Even-Numbered Series\n";
+        cout<<"3. Negative-Ten Series\n";
+        cout<<"4. Exit\n\n";
+        cout<<"Please enter your choice of game to play: ";
+        cin>>menuChoice;
+        switch (menuChoice) {
+            case 1:
+                cout<<"Let's play Count Backwards!\n";
+                cout<<"Please enter a positive number: ";
+                cin>>startNumber;
+                while (startNumber<=0) {
+                    cout<<startNumber<<" is too small. Please enter a positive number: ";
+                    cin>>startNumber;
+                }
+                for (int i = startNumber; i > 0; i--) {
+                    cout<<i<<" ";
+                }
+                break;
+            case 2:
+                cout<<"Let's play Even-Number Series!\n";
+                cout<<"Please enter an even and positive number: ";
+                cin>>startNumber;
+                while (startNumber<=0 || startNumber%2 != 0) {
+                    cout<<startNumber<<" is not a valid number. Please enter an even and positive number: ";
+                    cin>>startNumber;
+                }
+                for (int i = 2; i <= startNumber; i += 2) {
+                    cout<<i<<" ";
+                }
+                break;
+            case 3:
+                cout<<"Let's play Powers of Ten!\n";
+                cout<<"Please enter a negative number that is a multiple of 10: ";
+                cin>>startNumber;
+                while (startNumber>=0 || startNumber%10 != 0) {
+                    cout<<startNumber<<" is not a valid number. Please enter a negative number that is a multiple of 10: ";
+                    cin>>startNumber;
+                }
+                for (int i=-10; i >= startNumber; i -= 10) {
+                    cout<<i<<" ";
+                }
+                break;
+            case 4:
+                cout<<"Good bye!\n";
+                break;
+            default:
+                break;
+        }
+        cout<<"\n\n";
+    } while (menuChoice != 4);
+    
+    return 0;
+}

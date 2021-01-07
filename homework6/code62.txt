@@ -1,0 +1,99 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+
+using namespace std;
+
+int inputCustomerNumber() {
+    int customerNumber;
+    cout<<"Enter customer number: ";
+    cin>>customerNumber;
+    while(customerNumber <=0) {
+        cout<<customerNumber<<" is invalid. Reenter customer number: ";
+        cin>>customerNumber;
+    }
+    return customerNumber;
+}
+string inputCategory() {
+    string category;
+    cout<<"Enter category(wedding, dog portrait, action image): ";
+    cin.ignore();
+    getline(cin, category);
+    while(category.compare("wedding")!=0 && category.compare("dog portrait")!=0 && category.compare("action image")!=0) {
+        cout<<category<<" is invalid. Reenter category(wedding, dog portrait, action image): ";
+        getline(cin, category);
+    }
+    return category;
+}
+float inputHours() {
+    float hours;
+    cout<<"Enter hours worked: ";
+    cin>>hours;
+    while(hours <=0) {
+        cout<<hours<<" is invalid. Reenter hours worked: ";
+        cin>>hours;
+    }
+    return hours;
+}
+int inputPrints() {
+    int printCnt;
+    cout<<"Enter number of 8 X 10 prints requested: ";
+    cin>>printCnt;
+    while(printCnt <=0) {
+        cout<<printCnt<<" is invalid. Reenter number of 8x10 prints requested: ";
+        cin>>printCnt;
+    }
+    return printCnt;
+}
+int inputEnlargements() {
+    int printCnt;
+    cout<<"Enter number of enlargements  14 X 20 requested: ";
+    cin>>printCnt;
+    while(printCnt <=0) {
+        cout<<printCnt<<" is invalid. Reenter number of 14x20 enlargements requested: ";
+        cin>>printCnt;
+    }
+    return printCnt;
+}
+void calcPrices(float hours, float prints, float enlargements, float &wholesale, float &retail) {
+    wholesale = hours * 50 + prints * 15 + enlargements * 35;
+    retail = wholesale * 5;
+}
+void display(int customerNumber, string category, float hours, int prints, int enlargements, float wholesale, float retail) {
+    cout.setf(ios::fixed);
+    cout.setf(ios::showpoint);
+    cout.precision(2);
+    cout<<"\nReceipt\n";
+    cout<<"Customer number:\t\t"<<customerNumber<<"\n";
+    cout<<"Category:\t\t\t"<<category<<"\n";
+    cout<<"Hours worked:\t\t\t"<<hours<<"\n";
+    cout<<"Number of 8x10 prints:\t\t"<<prints<<"\n";
+    cout<<"Number of 14x20 enlargements:\t"<<enlargements<<"\n";
+    cout<<"Whole price:\t\t\t$"<<wholesale<<"\n";
+    cout<<"Retail price:\t\t\t$"<<retail<<"\n";
+}
+int main()
+{
+    int customerNumber;
+    string category;
+    float hours;
+    int prints;
+    int enlargements;
+    float wholesale;
+    float retail;
+    
+    customerNumber = inputCustomerNumber();
+    category = inputCategory();
+    hours = inputHours();
+    prints = inputPrints();
+    enlargements = inputEnlargements();
+    calcPrices(hours, prints, enlargements, wholesale, retail);
+    display(customerNumber, category, hours, prints, enlargements, wholesale, retail);
+    return 0;
+}
